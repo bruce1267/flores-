@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flores que dicen lo que siento 🌷</title>
+
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  font-family: "Trebuchet MS", sans-serif;
+  color: #fff0f5;
+  background:
+    radial-gradient(ellipse at top, #38203e 0%, transparent 55%),
+    linear-gradient(135deg, #090817, #171025, #090817);
+  overflow-x: hidden;
+}
+
+header {
+  text-align: center;
+  padding: 48px 15px 25px;
+  position: relative;
+}
+
+header h1 {
+  color: #ffb5d2;
+  font-family: Georgia, serif;
+  font-size: clamp(2rem, 6vw, 3.5rem);
+  text-shadow: 0 0 22px #ff5caa80;
+  margin-bottom: 15px;
+}
+
+header p {
+  color: #f6dbea;
+  line-height: 1.8;
+}
+
+.heart {
+  color: #ff80b7;
+  animation: latido 1.5s infinite;
+  display: inline-block;
+}
+
+@keyframes latido {
+  50% { transform: scale(1.25); }
+}
+
+main {
+  width: min(1100px, 92%);
+  margin: auto;
+  padding: 20px 0 50px;
+}
+
+.intro {
+  text-align: center;
+  color: #e9bcd6;
+  margin-bottom: 28px;
+}
+
+.flowers {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(135px, 1fr));
+  gap: 20px;
+}
+
+.flower {
+  position: relative;
+  cursor: pointer;
+  text-align: center;
+  padding: 18px 8px;
+  border: 1px solid #ffffff16;
+  border-radius: 22px;
+  background: linear-gradient(145deg, #ffffff0c, #f58fce08);
+  transition: transform .3s, border-color .3s, background .3s;
+  animation: aparecer .8s both;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.flower:hover {
+  transform: translateY(-8px) scale(1.04);
+  border-color: #ff9dca;
+  background: #f78dc21b;
+  box-shadow: 0 0 25px #fa80c322;
+}
+
+.flower:focus-visible {
+  outline: 2px solid #ffb5d2;
+  outline-offset: 4px;
+}
+
+.bloom {
+  font-size: clamp(3.4rem, 9vw, 5.5rem);
+  display: block;
+  filter: drop-shadow(0 0 12px #ffb1dc33);
+  animation: flotar 3s ease-in-out infinite;
+}
+
+.flower:nth-child(even) .bloom {
+  animation-delay: -1.5s;
+}
+
+.flower h2 {
+  color: #ffc6e0;
+  font-size: 1rem;
+  margin-top: 12px;
+}
+
+.flower small {
+  display: block;
+  color: #cbb7d5;
+  margin-top: 7px;
+}
+
+@keyframes flotar {
+  0%, 100% { transform: translateY(0) rotate(-3deg); }
+  50% { transform: translateY(-8px) rotate(3deg); }
+}
+
+@keyframes aparecer {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+footer {
+  text-align: center;
+  padding: 15px 10px 30px;
+  color: #d5b2cc;
+}
+
+footer span {
+  color: #ff91c4;
+}
+
+/* CARTITA */
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: #080511dd;
+  backdrop-filter: blur(8px);
+}
+
+.overlay.visible {
+  display: flex;
+  animation: aparecer .3s both;
+}
+
+.letter {
+  position: relative;
+  width: min(420px, 100%);
+  padding: 35px 25px;
+  text-align: center;
+  border-radius: 25px;
+  color: #642c4e;
+  background: linear-gradient(145deg, #fff4f4, #ffe0ee);
+  box-shadow: 0 0 55px #ff8fcb35;
+  animation: carta .4s both;
+}
+
+@keyframes carta {
+  from { transform: scale(.75) rotate(-4deg); opacity: 0; }
+  to { transform: scale(1) rotate(0); opacity: 1; }
+}
+
+.close {
+  position: absolute;
+  top: 10px;
+  right: 13px;
+  width: 35px;
+  height: 35px;
+  border: none;
+  border-radius: 50%;
+  background: #8c315e;
+  color: white;
+  font-size: 1.4rem;
+  cursor: pointer;
+}
+
+.letter-flower {
+  font-size: 5rem;
+  margin: 8px 0 15px;
+  animation: flotar 3s infinite;
+}
+
+.letter h2 {
+  font-family: Georgia, serif;
+  font-size: 1.8rem;
+  color: #9b3269;
+  margin-bottom: 17px;
+}
+
+.letter p {
+  font-family: Georgia, serif;
+  font-size: 1.2rem;
+  line-height: 1.7;
+  white-space: pre-line;
+}
+
+.signature {
+  margin-top: 24px;
+  color: #b34c80;
+  font-style: italic;
+}
+
+#petals {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 20;
+  overflow: hidden;
+}
+
+.petal {
+  position: absolute;
+  top: -30px;
+  animation: caer linear forwards;
+}
+
+@keyframes caer {
+  to {
+    transform: translateY(110vh) rotate(650deg);
+    opacity: 0;
+  }
+}
+
+@media (max-width: 450px) {
+  header { padding-top: 35px; }
+  .flowers { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .flower { padding: 16px 5px; }
+  .letter { padding: 32px 20px; }
+}
+</style>
+</head>
+
+<body>
+
+<div id="petals"></div>
+
+<header>
+  <h1>Flores que dicen<br>lo que siento <span class="heart">♥</span></h1>
+  <p>Cada flor guarda un mensaje especial...</p>
+  <p>Toca una y descubre lo que significa para ti 🌷</p>
+</header>
+
+<main>
+  <div class="intro">
+    ✨ Un pequeño detalle para sacarte una sonrisa ✨
+  </div>
+
+  <section class="flowers" id="flowers"></section>
+</main>
+
+<footer>
+  Las flores también hablan... <span>♥</span><br><br>
+  Toca, descubre y sonríe 🌸
+</footer>
+
+<div class="overlay" id="overlay" role="dialog"
+     aria-modal="true" aria-labelledby="letterTitle">
+  <article class="letter">
+    <button class="close" id="close" aria-label="Cerrar">×</button>
+    <div class="letter-flower" id="letterFlower"></div>
+    <h2 id="letterTitle"></h2>
+    <p id="letterMessage"></p>
+    <div class="signature">Con cariño, para ti ♥</div>
+  </article>
+</div>
+
+<script>
+const flowers = [
+  {
+    name: "Lirios",
+    emoji: "💐",
+    subtitle: "Para mi delirio",
+    message: "Aquí tienes unos lirios para ti,\nque eres mi delirio. 🌷\n\nPorque hasta la flor más bonita\nse queda corta al compararse contigo."
+  },
+  {
+    name: "Rosas",
+    emoji: "🌹",
+    subtitle: "Un cariño especial",
+    message: "Te regalo estas rosas\npara recordarte algo especial:\n\nHay personas que hacen más bonito\ncualquier día con tan solo llegar.\nY tú eres una de ellas. ❤️"
+  },
+  {
+    name: "Girasoles",
+    emoji: "🌻",
+    subtitle: "Mi rayito de sol",
+    message: "Te regalo un girasol,\nporque siempre busca la luz.\n\nY yo, entre tantas cosas bonitas,\nme alegro cada vez que apareces tú. ☀️"
+  },
+  {
+    name: "Margaritas",
+    emoji: "🌼",
+    subtitle: "Una sonrisa",
+    message: "Una margarita para ti,\nque tienes una forma especial\nde convertir un día normal\nen un recuerdo bonito. 🌼"
+  },
+  {
+    name: "Tulipanes",
+    emoji: "🌷",
+    subtitle: "Algo bonito",
+    message: "Un tulipán para alguien especial,\ncon una sonrisa fenomenal.\n\nQue nunca te falten motivos\npara reír y soñar. 💗"
+  },
+  {
+    name: "Hortensias",
+    emoji: "🪻",
+    subtitle: "Mil razones",
+    message: "Como una hortensia llena de flores,\nte regalo un montón de razones\npara sonreír.\n\nY ojalá esta sea una de ellas. 💜"
+  },
+  {
+    name: "Cerezos",
+    emoji: "🌸",
+    subtitle: "Un momento bonito",
+    message: "Como los pétalos del cerezo,\nque bailan con el viento,\nquisiera regalarte un instante bonito\nque recuerdes con una sonrisa. 🌸"
+  },
+  {
+    name: "Gerberas",
+    emoji: "🌺",
+    subtitle: "Alegría para ti",
+    message: "Estas flores son para ti,\npara alegrarte el día.\n\nPorque el mundo necesita más personas\nque compartan su alegría. 💖"
+  }
+];
+
+const container = document.getElementById("flowers");
+const overlay = document.getElementById("overlay");
+const closeButton = document.getElementById("close");
+
+flowers.forEach((flower, index) => {
+  const card = document.createElement("button");
+  card.type = "button";
+  card.className = "flower";
+  card.style.animationDelay = `${index * 0.08}s`;
+  card.setAttribute("aria-label", `Abrir mensaje: ${flower.name}`);
+
+  card.innerHTML = `
+    <span class="bloom" aria-hidden="true">${flower.emoji}</span>
+    <h2>${flower.name}</h2>
+    <small>${flower.subtitle}</small>
+  `;
+
+  card.addEventListener("click", () => {
+    document.getElementById("letterFlower").textContent = flower.emoji;
+    document.getElementById("letterTitle").textContent = flower.name;
+    document.getElementById("letterMessage").textContent = flower.message;
+
+    overlay.classList.add("visible");
+    closeButton.focus();
+    makePetals();
+  });
+
+  container.appendChild(card);
+});
+
+function closeLetter() {
+  overlay.classList.remove("visible");
+}
+
+closeButton.addEventListener("click", closeLetter);
+
+overlay.addEventListener("click", (event) => {
+  if (event.target === overlay) closeLetter();
+});
+
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape") closeLetter();
+});
+
+function makePetals() {
+  const area = document.getElementById("petals");
+
+  for (let i = 0; i < 18; i++) {
+    const petal = document.createElement("span");
+    petal.className = "petal";
+    petal.textContent = ["🌸", "💗", "🌷", "✨"][
+      Math.floor(Math.random() * 4)
+    ];
+    petal.style.left = Math.random() * 100 + "vw";
+    petal.style.animationDuration = (2 + Math.random() * 3) + "s";
+    petal.style.animationDelay = (Math.random() * 0.8) + "s";
+    petal.style.fontSize = (14 + Math.random() * 18) + "px";
+
+    area.appendChild(petal);
+    petal.addEventListener("animationend", () => petal.remove());
+  }
+}
+</script>
+
+</body>
+</html>
